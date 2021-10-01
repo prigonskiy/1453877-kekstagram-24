@@ -62,8 +62,8 @@ const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements
 
 // Функция для проверки наличия числа среди значений элементов массива
 const numberAlreadyUsed = (numberToCheck, arrayOfUsedNumbers) => {
-  for (let i = 0; i < arrayOfUsedNumbers.length; i++) {
-    if (numberToCheck === arrayOfUsedNumbers[i]) {
+  for (let counter = 0; counter < arrayOfUsedNumbers.length; counter++) {
+    if (numberToCheck === arrayOfUsedNumbers[counter]) {
       return true;
     }
   }
@@ -101,8 +101,8 @@ const createPhotoDescription = (photoID) => ({
 // Функция для создания массива заданной длины из объектов
 const objectsArray = (numberOfElements, objectItem) => {
   const arrayOfObjects = [];
-  for (let i = 0; i < numberOfElements; i++) {
-    arrayOfObjects[i] = objectItem(i);
+  for (let counter = 0; counter < numberOfElements; counter++) {
+    arrayOfObjects[counter] = objectItem(counter);
   }
   return arrayOfObjects;
 };
