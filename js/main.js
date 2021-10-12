@@ -1,5 +1,8 @@
-import {objectsArray} from './util.js';
-import {createPhotoDescription} from './data.js';
-import {NUMBER_OF_PHOTOS} from './const.js';
+// import {objectsArray} from './util.js';
+// import {createPhotoDescription} from './data.js';
+// import {NUMBER_OF_PHOTOS} from './const.js';
+import {userPictures} from './thumbs.js';
 
-objectsArray(NUMBER_OF_PHOTOS, createPhotoDescription);
+userPictures();
+
+// objectsArray(NUMBER_OF_PHOTOS, createPhotoDescription);
