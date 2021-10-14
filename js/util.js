@@ -1,5 +1,5 @@
 // Функция для поиска случайного целого числа в заданном диапазоне (включительно). Взял с MDN, что уж там :)
-const getRandomNumber = function (rangeStart, rangeEnd) {
+const getRandomNumber = (rangeStart, rangeEnd) => {
   if (rangeStart > rangeEnd) {
     return('Начальное значение диапазона не может быть больше конечного');
   } else if ((rangeStart < 0) || (rangeEnd < 0)) {
@@ -11,9 +11,7 @@ const getRandomNumber = function (rangeStart, rangeEnd) {
 };
 
 // Функция для сравнения длины строки с максимально допустимой длиной
-const getCommentaryLength = function (commentary,maxCommentaryLength) {
-  return (commentary.length <= maxCommentaryLength);
-};
+const getCommentaryLength = (commentary, maxCommentaryLength) => commentary.length <= maxCommentaryLength;
 
 // Функция, возвращающая произвольный элемент массива
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
