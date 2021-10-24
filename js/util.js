@@ -46,4 +46,10 @@ const createUniqueRandomNumber = (usedNumbers) => {
   }
 };
 
-export {getRandomNumber, limitCommentaryLength, getRandomArrayElement, createObjectsArray, createUniqueRandomNumber};
+// Функция для проверки нажатия на кнопку Escape
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+// Функция для проверки нажатия на кнопку Enter
+const isEnterKey = (evt) => evt.key === 'Enter';
+
+export {getRandomNumber, limitCommentaryLength, getRandomArrayElement, createObjectsArray, createUniqueRandomNumber, isEscapeKey, isEnterKey};
