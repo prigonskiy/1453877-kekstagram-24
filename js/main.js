@@ -4,7 +4,6 @@ import {NUMBER_OF_PHOTOS} from './const.js';
 import {createThumbnails} from './thumbs.js';
 import {listenThumbnails} from './gallery.js';
 
-
 const photosArray = createObjectsArray(NUMBER_OF_PHOTOS , createPhotoDescription);
 
 // Временно прячем относящиеся к комментариям элементы
