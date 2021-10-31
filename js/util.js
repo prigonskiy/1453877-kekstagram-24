@@ -52,4 +52,16 @@ const isEscapeKey = (evt) => evt.key === 'Escape';
 // Функция для проверки нажатия на кнопку Enter
 const isEnterKey = (evt) => evt.key === 'Enter';
 
-export {getRandomNumber, limitCommentaryLength, getRandomArrayElement, createObjectsArray, createUniqueRandomNumber, isEscapeKey, isEnterKey};
+// Функция для проверки нажатия на кнопку "закрыть" модального окна
+const isCloseButton = (evt) => evt.closest('.big-picture__cancel');
+
+// Функция для нахождения номера выбранного элемента коллекции
+const findElementNumber = (element, collection) => {
+  for (let currentElement = 0; currentElement < collection.length; currentElement++) {
+    if (element === collection[currentElement]) {
+      return currentElement;
+    }
+  }
+};
+
+export {getRandomNumber, limitCommentaryLength, getRandomArrayElement, createObjectsArray, createUniqueRandomNumber, isEscapeKey, isEnterKey, isCloseButton, findElementNumber};

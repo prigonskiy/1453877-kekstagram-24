@@ -52,4 +52,16 @@ const createBigPicture = (object) => {
   insertComments(object.comments, bigPicture);
 };
 
-export {createBigPicture};
+// Функция для открытия полноэкранного режима просмотра
+const openBigPictureModal = () => {
+  document.querySelector('.big-picture').classList.remove('hidden');
+  document.querySelector('body').classList.add('modal-open');
+};
+
+// Функция для закрытия полноэкранного режима просмотра
+const closeBigPictureModal = () => {
+  document.querySelector('.big-picture').classList.add('hidden');
+  document.querySelector('body').classList.remove('modal-open');
+};
+
+export {createBigPicture, openBigPictureModal, closeBigPictureModal};
