@@ -10,6 +10,14 @@ const onModalEscKeydown = (evt) => {
   }
 };
 
+const onBackgroundClick = (evt) => {
+  const bigPicture = document.querySelector('.big-picture');
+  if ((!evt.target.closest('.big-picture__preview')) && (!bigPicture.classList.contains('hidden'))) {
+    closeBigPictureModal();
+    bigPicture.removeEventListener('click', onBackgroundClick);
+  }
+};
+
 // Функция, описывающая порядок действий при нажатии на кнопку "закрыть"
 const onModalCloseClick = (evt) => {
   const bigPicture = document.querySelector('.big-picture');
@@ -29,6 +37,7 @@ const listenThumbnails = (array) => {
       openBigPictureModal();
       document.addEventListener('keydown', onModalEscKeydown);
       bigPicture.querySelector('.big-picture__cancel').addEventListener('click', onModalCloseClick);
+      bigPicture.addEventListener('click', onBackgroundClick);
     }
   });
 };
