@@ -6,6 +6,7 @@ const onModalEscKeydown = (evt) => {
   if (isEscapeKey) {
     evt.preventDefault();
     closeBigPictureModal();
+    document.removeEventListener('keydown', onModalEscKeydown);
   }
 };
 
@@ -13,6 +14,7 @@ const onModalEscKeydown = (evt) => {
 const onModalCloseClick = (evt) => {
   evt.preventDefault();
   closeBigPictureModal();
+  document.querySelector('.big-picture').removeEventListener('click', onModalCloseClick);
 };
 
 // Функция, добавляющая обработчики события "клик" всем миниатюрам изображений на странице
