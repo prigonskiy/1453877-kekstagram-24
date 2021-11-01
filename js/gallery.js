@@ -12,9 +12,10 @@ const onModalEscKeydown = (evt) => {
 
 // Функция, описывающая порядок действий при нажатии на кнопку "закрыть"
 const onModalCloseClick = (evt) => {
+  const bigPicture = document.querySelector('.big-picture');
   evt.preventDefault();
   closeBigPictureModal();
-  document.querySelector('.big-picture').removeEventListener('click', onModalCloseClick);
+  bigPicture.querySelector('.big-picture__cancel').removeEventListener('click', onModalCloseClick);
 };
 
 // Функция, добавляющая обработчики события "клик" всем миниатюрам изображений на странице
