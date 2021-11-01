@@ -11,13 +11,13 @@ const getRandomNumber = (rangeStart, rangeEnd) => {
 };
 
 // Функция для сравнения длины строки с максимально допустимой длиной
-const getCommentaryLength = (commentary, maxCommentaryLength) => commentary.length <= maxCommentaryLength;
+const limitCommentaryLength = (commentary, maxCommentaryLength) => commentary.length <= maxCommentaryLength;
 
 // Функция, возвращающая произвольный элемент массива
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
 // Функция для создания массива заданной длины из объектов
-const objectsArray = (numberOfElements, objectItem) => {
+const createObjectsArray = (numberOfElements, objectItem) => {
   const arrayOfObjects = [];
   for (let counter = 0; counter < numberOfElements; counter++) {
     arrayOfObjects[counter] = objectItem(counter);
@@ -25,4 +25,40 @@ const objectsArray = (numberOfElements, objectItem) => {
   return arrayOfObjects;
 };
 
-export {getRandomNumber, getCommentaryLength, getRandomArrayElement, objectsArray};
+// Функция для проверки наличия числа среди значений элементов массива
+const checkUsedNumber = (numberToCheck, arrayOfUsedNumbers) => {
+  for (let counter = 0; counter < arrayOfUsedNumbers.length; counter++) {
+    if (numberToCheck === arrayOfUsedNumbers[counter]) {
+      return true;
+    }
+  }
+  return false;
+};
+
+// Функция для создания уникального и случайного числа
+const createUniqueRandomNumber = (usedNumbers) => {
+  while (usedNumbers) {
+    const number = getRandomNumber(1, 500);
+    if (!checkUsedNumber(number, usedNumbers)) {
+      usedNumbers.push(number);
+      return(number);
+    }
+  }
+};
+
+// Функция для проверки нажатия на кнопку Escape
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+// Функция для проверки нажатия на кнопку Enter
+const isEnterKey = (evt) => evt.key === 'Enter';
+
+// Функция для нахождения номера выбранного элемента коллекции
+const findElementNumber = (element, collection) => {
+  for (let currentElement = 0; currentElement < collection.length; currentElement++) {
+    if (element === collection[currentElement]) {
+      return currentElement;
+    }
+  }
+};
+
+export {getRandomNumber, limitCommentaryLength, getRandomArrayElement, createObjectsArray, createUniqueRandomNumber, isEscapeKey, isEnterKey, findElementNumber};

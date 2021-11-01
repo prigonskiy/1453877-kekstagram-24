@@ -1,4 +1,14 @@
+import {createObjectsArray} from './util.js';
+import {createPhotoDescription} from './data.js';
 import {NUMBER_OF_PHOTOS} from './const.js';
 import {createThumbnails} from './thumbs.js';
+import {listenThumbnails} from './gallery.js';
 
-createThumbnails(NUMBER_OF_PHOTOS);
+const photosArray = createObjectsArray(NUMBER_OF_PHOTOS , createPhotoDescription);
+
+// Временно прячем относящиеся к комментариям элементы
+document.querySelector('.social__comment-count').classList.add('hidden');
+document.querySelector('.social__comments-loader').classList.add('hidden');
+
+createThumbnails(photosArray);
+listenThumbnails(photosArray);
