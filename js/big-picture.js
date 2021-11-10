@@ -38,7 +38,7 @@ const insertComments = (array, bigPictureTemplate) => {
 };
 
 // Функция для отображения изображения в полноразмерном режиме, со всеми комментариями и лайками
-const createBigPicture = (object) => {
+const createBigPictureModal = (object) => {
   const bigPicture = document.querySelector('.big-picture');
   const bigPictureImageWrapper = bigPicture.querySelector('.big-picture__img');
   const bigPictureImage = bigPictureImageWrapper.querySelector('img');
@@ -64,4 +64,4 @@ const closeBigPictureModal = () => {
   document.querySelector('body').classList.remove('modal-open');
 };
 
-export {createBigPicture, openBigPictureModal, closeBigPictureModal};
+export {createBigPictureModal, openBigPictureModal, closeBigPictureModal};

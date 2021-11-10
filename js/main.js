@@ -2,8 +2,7 @@ import {createObjectsArray} from './util.js';
 import {createPhotoDescription} from './data.js';
 import {NUMBER_OF_PHOTOS} from './const.js';
 import {createThumbnails} from './thumbs.js';
-import {listenThumbnails} from './gallery.js';
-import {listenUploadForm} from './form.js';
+import {listenThumbnails, listenUploadForm} from './gallery.js';
 
 const photosArray = createObjectsArray(NUMBER_OF_PHOTOS , createPhotoDescription);
 
