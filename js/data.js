@@ -1,5 +1,5 @@
 import {getRandomNumber, getRandomArrayElement, createUniqueRandomNumber} from './util.js';
-import {NUMBER_OF_AVATARS, LIKES_MIN, LIKES_MAX} from './const.js';
+import {NUMBER_OF_AVATARS, LIKES_MAX_LENGTH, LIKES_MIN_LENGTH} from './const.js';
 import {MESSAGES, NAMES, DESCRIPTIONS} from './mocks.js';
 const usedNumbers = [];
 
@@ -16,7 +16,7 @@ const createPhotoDescription = (photoID) => ({
   id: photoID + 1,
   url: `photos/${photoID + 1}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
-  likes: getRandomNumber(LIKES_MIN, LIKES_MAX),
+  likes: getRandomNumber(LIKES_MIN_LENGTH, LIKES_MAX_LENGTH),
   comments: Array.from({length: getRandomNumber(1, 5)}, createCommentary),
 });
 

@@ -2,5 +2,9 @@
 export const MAX_COMMENTARY_LENGTH = 140;
 export const NUMBER_OF_AVATARS = 6;
 export const NUMBER_OF_PHOTOS = 25;
-export const LIKES_MIN = 15;
-export const LIKES_MAX = 200;
+export const LIKES_MIN_LENGTH = 15;
+export const LIKES_MAX_LENGTH = 200;
+export const HASHTAGS_SYMBOL_RESTRICTIONS = /(^#[A-Za-zА-Яа-яЁё0-9]{1,19})$/;
+export const HASHTAG_MIN_LENGTH = 2;
+export const HASHTAG_MAX_LENGTH = 20;
+export const HASHTAGS_MAX_AMOUNT = 5;

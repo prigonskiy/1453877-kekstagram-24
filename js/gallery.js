@@ -3,18 +3,18 @@ import {findElementNumber, isEscapeKey} from './util.js';
 
 // Функция, описывающая порядок действий при нажатии на ESC
 const onModalEscKeydown = (evt) => {
-  if (isEscapeKey) {
+  if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeBigPictureModal();
     document.removeEventListener('keydown', onModalEscKeydown);
   }
 };
 
-const onBackgroundClick = (evt) => {
+const onBackgroundBigPictureClick = (evt) => {
   const bigPicture = document.querySelector('.big-picture');
   if ((!evt.target.closest('.big-picture__preview')) && (!bigPicture.classList.contains('hidden'))) {
     closeBigPictureModal();
-    bigPicture.removeEventListener('click', onBackgroundClick);
+    bigPicture.removeEventListener('click', onBackgroundBigPictureClick);
   }
 };
 
@@ -37,7 +37,7 @@ const listenThumbnails = (array) => {
       openBigPictureModal();
       document.addEventListener('keydown', onModalEscKeydown);
       bigPicture.querySelector('.big-picture__cancel').addEventListener('click', onModalCloseClick);
-      bigPicture.addEventListener('click', onBackgroundClick);
+      bigPicture.addEventListener('click', onBackgroundBigPictureClick);
     }
   });
 };
