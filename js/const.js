@@ -11,7 +11,7 @@ export const HASHTAGS_MAX_AMOUNT = 5;
 export const SCALE = {step: 25, min: 0, max: 100};
 export const DEFAULT_SCALE_VALUE = 55;
 export const EDITOR_EFFECTS = {
-  'original': {style: 'none', min: 0, max: 1, step: 1},
+  'none': {style: 'none', min: 0, max: 1, step: 1},
   'chrome': {style: 'grayscale', min: 0, max: 1, step: 0.1},
   'sepia': {style: 'sepia', min: 0, max: 1, step: 0.1},
   'marvin': {style: 'invert', min: 0, max: 100, step: 1},
