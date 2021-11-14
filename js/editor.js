@@ -73,6 +73,7 @@ const onFilterClick = (evt) => {
 const setDefaultEditorValues = () => {
   const imagePreview = document.querySelector('.img-upload__preview img');
   const scaleInput = document.querySelector('.scale__control--value');
+  const effectLevel = document.querySelector('#effect-level__value');
   imagePreview.style.transform = `scale(${DEFAULT_SCALE_VALUE / 100})`;
   scaleInput.setAttribute('value', `${DEFAULT_SCALE_VALUE}%`);
   imagePreview.style.filter = 'none';
@@ -80,59 +81,7 @@ const setDefaultEditorValues = () => {
   if (document.querySelector('.effect-level__slider').classList.contains('noUi-target')) {
     document.querySelector('.effect-level__slider').noUiSlider.destroy();
   }
+  effectLevel.setAttribute('value', '');
 };
-
-// createSlider = (EDITOR_VALUES.MIN_VALUE, EDITOR_VALUES.MAX_VALUE, )
-
-
-// const createEffectSlider = () => {
-//   const sliderElement = document.querySelector('.effect-level__slider');
-//   const effectOriginal = document.querySelector('#effect-none');
-//   const effectChrome = document.querySelector('#effect-chrome');
-//   const effectSepia = document.querySelector('#effect-sepia');
-//   const effectMarvin = document.querySelector('#effect-marvin');
-//   const effectPhobos = document.querySelector('#effect-phobos');
-//   const effectHeat = document.querySelector('#effect-heat');
-//   const effectLevel = document.querySelector('#effect-level__value');
-//   const uploadedImageContainer = document.querySelector('.img-upload__preview');
-//   const uploadedImage = uploadedImageContainer.querySelector('img');
-
-//   noUiSlider.create(sliderElement, {
-//     range: {
-//       min: 0,
-//       max: 100,
-//     },
-//     start: 0,
-//     step: 1,
-//     connect: 'lower',
-//   });
-
-//   sliderElement.noUiSlider.on('update', (values, handle) => {
-//     effectLevel.value = values[handle];
-//   });
-
-//   slider.noUiSlider.on('update', (__, handle, unencoded) => {
-//     effectLevel.value = unencoded[handle];
-//     effectLevel.setAttrubute('value', unencoded);
-//     if (effectOriginal.checked) {
-//       slider.classList.add('hidden');
-//     } if (effectChrome.checked) {
-//       slider.classList.remove('hidden');
-//       uploadedImage.style.filter = `grayscale(${effectLevel.value})`;
-//     } if (effectSepia.checked) {
-//       slider.classList.remove('hidden');
-//       uploadedImage.style.filter = `sepia(${effectLevel.value})`;
-//     } if (effectMarvin.checked) {
-//       slider.classList.remove('hidden');
-//       uploadedImage.style.filter = `invert(${effectLevel.value / 100})`;
-//     } if (effectPhobos.checked) {
-//       slider.classList.remove('hidden');
-//       uploadedImage.style.filter = `blur(${effectLevel.value}px)`;
-//     } if (effectHeat.checked) {
-//       slider.classList.remove('hidden');
-//       uploadedImage.style.filter = `brightness(${effectLevel.value})`;
-//     }
-//   });
-// };
 
 export {scaleImageUpload, onScaleClick, onFilterClick, setDefaultEditorValues, createSlider};
