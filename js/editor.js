@@ -57,14 +57,6 @@ const onFilterClick = (evt) => {
       effectLevel.value = unencoded[handle];
       effectLevel.setAttribute('value', unencoded);
       imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value}${EDITOR_EFFECTS[imageFilter].unit})`;
-      // switch (imageFilter) {
-      //   case 'chrome': imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value})`; break;
-      //   case 'sepia': imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value})`; break;
-      //   case 'marvin': imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value}%)`; break;
-      //   case 'phobos': imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value}px)`; break;
-      //   case 'heat': imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value})`; break;
-      //   default: imagePreview.style.filter = 'none'; break;
-      // }
     });
   } else {
     imagePreview.style.filter = 'none';
@@ -83,6 +75,8 @@ const setDefaultEditorValues = () => {
     document.querySelector('.effect-level__slider').noUiSlider.destroy();
   }
   effectLevel.setAttribute('value', '');
+  document.querySelector('.text__hashtags').value = '';
+  document.querySelector('.text__description').value = '';
 };
 
 export {scaleImageUpload, onScaleClick, onFilterClick, setDefaultEditorValues, createSlider};
