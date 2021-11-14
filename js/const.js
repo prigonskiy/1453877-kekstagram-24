@@ -11,11 +11,11 @@ export const HASHTAGS_MAX_AMOUNT = 5;
 export const SCALE = {step: 25, min: 0, max: 100};
 export const DEFAULT_SCALE_VALUE = 55;
 export const EDITOR_EFFECTS = {
-  'none': {style: 'none', min: 0, max: 1, step: 1},
-  'chrome': {style: 'grayscale', min: 0, max: 1, step: 0.1},
-  'sepia': {style: 'sepia', min: 0, max: 1, step: 0.1},
-  'marvin': {style: 'invert', min: 0, max: 100, step: 1},
-  'phobos': {style: 'blur', min: 0, max: 3, step: 0.1},
-  'heat': {style: 'brightness', min: 1, max: 3, step: 0.1},
+  'none': {style: 'none', min: 0, max: 1, step: 1, unit: ''},
+  'chrome': {style: 'grayscale', min: 0, max: 1, step: 0.1, unit: ''},
+  'sepia': {style: 'sepia', min: 0, max: 1, step: 0.1, unit: ''},
+  'marvin': {style: 'invert', min: 0, max: 100, step: 1, unit: '%'},
+  'phobos': {style: 'blur', min: 0, max: 3, step: 0.1, unit: 'px'},
+  'heat': {style: 'brightness', min: 1, max: 3, step: 0.1, unit: ''},
 };
 

@@ -56,14 +56,15 @@ const onFilterClick = (evt) => {
     sliderElement.noUiSlider.on('update', (_, handle, unencoded) => {
       effectLevel.value = unencoded[handle];
       effectLevel.setAttribute('value', unencoded);
-      switch (imageFilter) {
-        case 'chrome': imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value})`; break;
-        case 'sepia': imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value})`; break;
-        case 'marvin': imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value}%)`; break;
-        case 'phobos': imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value}px)`; break;
-        case 'heat': imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value})`; break;
-        default: imagePreview.style.filter = 'none'; break;
-      }
+      imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value}${EDITOR_EFFECTS[imageFilter].unit})`;
+      // switch (imageFilter) {
+      //   case 'chrome': imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value})`; break;
+      //   case 'sepia': imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value})`; break;
+      //   case 'marvin': imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value}%)`; break;
+      //   case 'phobos': imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value}px)`; break;
+      //   case 'heat': imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value})`; break;
+      //   default: imagePreview.style.filter = 'none'; break;
+      // }
     });
   } else {
     imagePreview.style.filter = 'none';
