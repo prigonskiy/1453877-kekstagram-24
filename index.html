@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="/nouislider/nouislider.css">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -29,7 +30,7 @@
       <!-- Поле для загрузки нового изображения на сайт -->
       <section class="img-upload">
         <div class="img-upload__wrapper">
-          <h2 class="img-upload__title  visually-hidden">Загрузка sфотографии</h2>
+          <h2 class="img-upload__title  visually-hidden">Загрузка фотографии</h2>
           <form class="img-upload__form" id="upload-select-image" action="https://24.javascript.pages.academy/kekstagram" method="post" enctype="multipart/form-data" autocomplete="off">
 
             <!-- Изначальное состояние поля для загрузки изображения -->
@@ -57,7 +58,7 @@
 
                   <!-- Изменение глубины эффекта, накладываемого на изображение -->
                   <fieldset class="img-upload__effect-level  effect-level">
-                    <input class="effect-level__value" type="number" step="any" name="effect-level" value="">
+                    <input class="effect-level__value" id="effect-level__value" type="number" step="any" name="effect-level" value="">
                     <div class="effect-level__slider"></div>
                   </fieldset>
 
@@ -231,6 +232,6 @@
   </template>
 
   <script src="js/main.js" type="module"></script>
-
+  <script src="/nouislider/nouislider.js"></script>
 </body>
 </html>

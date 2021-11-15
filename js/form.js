@@ -1,6 +1,3 @@
-// import {isEscapeKey} from './util.js';
-
-
 // Добавление классов, показывающих модальное окно загрузки изображения
 const openImageUploadModal = () => {
   document.querySelector('.img-upload__overlay').classList.remove('hidden');

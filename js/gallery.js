@@ -2,6 +2,7 @@ import {createBigPictureModal, openBigPictureModal, closeBigPictureModal} from '
 import {openImageUploadModal, closeImageUploadModal} from './form.js';
 import {findElementNumber, isEscapeKey} from './util.js';
 import {HASHTAGS_SYMBOL_RESTRICTIONS, HASHTAG_MIN_LENGTH, HASHTAG_MAX_LENGTH, HASHTAGS_MAX_AMOUNT, MAX_COMMENTARY_LENGTH} from './const.js';
+import {scaleImageUpload, onScaleClick, onFilterClick, setDefaultEditorValues} from './editor.js';
 
 
 // Функция, описывающая порядок действий при нажатии на ESC при открытом модальном окне полноэкранного просмотра пользовательского изображения
@@ -91,9 +92,13 @@ const onImageUploadModalEscKeydown = (evt) => {
   if ((isEscapeKey(evt)) && !((document.activeElement === hashtagInput) || (document.activeElement === descriptionInput))) {
     evt.preventDefault();
     closeImageUploadModal();
+    setDefaultEditorValues();
     document.removeEventListener('keydown', onImageUploadModalEscKeydown);
     hashtagInput.removeEventListener('blur', onHashtagValueChange);
     descriptionInput.removeEventListener('blur', onDescriptionChange);
+    document.querySelector('.img-upload__scale').removeEventListener('click', onScaleClick);
+    document.querySelector('.effects__list').removeEventListener('change', onFilterClick);
+    document.removeEventListener('keydown', onImageUploadModalEscKeydown);
   }
 };
 
@@ -101,18 +106,25 @@ const onImageUploadModalEscKeydown = (evt) => {
 const onImageUploadModalCloseClick = (evt) => {
   evt.preventDefault();
   closeImageUploadModal();
+  setDefaultEditorValues();
   document.removeEventListener('click', onImageUploadModalCloseClick);
   document.querySelector('.text__hashtags').removeEventListener('blur', onHashtagValueChange);
   document.querySelector('.text__description').removeEventListener('blur', onDescriptionChange);
+  document.querySelector('.img-upload__scale').removeEventListener('click', onScaleClick);
+  document.querySelector('.effects__list').removeEventListener('change', onFilterClick);
+  document.removeEventListener('keydown', onImageUploadModalEscKeydown);
 };
 
 // Функция, описывающая поряок действий при нажатии на контрол загрузки изображений
 const onImageUploadModalClick = (evt) => {
   evt.preventDefault();
   openImageUploadModal();
+  scaleImageUpload();
   document.querySelector('#upload-cancel').addEventListener('click', onImageUploadModalCloseClick);
   document.querySelector('.text__hashtags').addEventListener('blur', onHashtagValueChange);
   document.querySelector('.text__description').addEventListener('blur', onDescriptionChange);
+  document.querySelector('.img-upload__scale').addEventListener('click', onScaleClick);
+  document.querySelector('.effects__list').addEventListener('change', onFilterClick);
   document.addEventListener('keydown', onImageUploadModalEscKeydown);
 };
 
