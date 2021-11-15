@@ -117,10 +117,10 @@ const onImageUploadModalCloseClick = (evt) => {
 
 // Прослушивание кнопки "опубликовать"
 const setUserFormSubmit = (onSuccess) => {
-  document.querySelector('upload-select-image').addEventListener('submit', (evt) => {
+  document.querySelector('#upload-select-image').addEventListener('submit', (evt) => {
     evt.preventDefault();
     const formData = new FormData(evt.target);
-    fetch('https://24.javascript.pages.academy/kekstagram/',
+    fetch('https://24.javascript.pages.academy/kekstagram',
       {
         method: 'POST',
         body: formData,
@@ -130,8 +130,7 @@ const setUserFormSubmit = (onSuccess) => {
 };
 
 // Функция, описывающая поряок действий при нажатии на контрол загрузки изображений
-const onImageUploadModalClick = (evt) => {
-  evt.preventDefault();
+const onImageUploadModalUpload = () => {
   openImageUploadModal();
   scaleImageUpload();
   document.querySelector('#upload-cancel').addEventListener('click', onImageUploadModalCloseClick);
@@ -145,7 +144,7 @@ const onImageUploadModalClick = (evt) => {
 
 // Функция, добавляющая обработчик события контролу загрузки изображений
 const listenUploadForm = () => {
-  document.querySelector('#upload-file').addEventListener('click', onImageUploadModalClick);
+  document.querySelector('#upload-file').addEventListener('change', onImageUploadModalUpload);
 };
 
 export {listenThumbnails, listenUploadForm, setUserFormSubmit};
