@@ -115,6 +115,20 @@ const onImageUploadModalCloseClick = (evt) => {
   document.removeEventListener('keydown', onImageUploadModalEscKeydown);
 };
 
+// Прослушивание кнопки "опубликовать"
+const setUserFormSubmit = (onSuccess) => {
+  document.querySelector('upload-select-image').addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const formData = new FormData(evt.target);
+    fetch('https://24.javascript.pages.academy/kekstagram/',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    ).then(() => onSuccess());
+  });
+};
+
 // Функция, описывающая поряок действий при нажатии на контрол загрузки изображений
 const onImageUploadModalClick = (evt) => {
   evt.preventDefault();
@@ -126,6 +140,7 @@ const onImageUploadModalClick = (evt) => {
   document.querySelector('.img-upload__scale').addEventListener('click', onScaleClick);
   document.querySelector('.effects__list').addEventListener('change', onFilterClick);
   document.addEventListener('keydown', onImageUploadModalEscKeydown);
+  setUserFormSubmit(setDefaultEditorValues());
 };
 
 // Функция, добавляющая обработчик события контролу загрузки изображений
@@ -133,4 +148,4 @@ const listenUploadForm = () => {
   document.querySelector('#upload-file').addEventListener('click', onImageUploadModalClick);
 };
 
-export {listenThumbnails, listenUploadForm};
+export {listenThumbnails, listenUploadForm, setUserFormSubmit};
