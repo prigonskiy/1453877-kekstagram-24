@@ -61,4 +61,12 @@ const findElementNumber = (element, collection) => {
   }
 };
 
-export {getRandomNumber, limitCommentaryLength, getRandomArrayElement, createObjectsArray, createUniqueRandomNumber, isEscapeKey, isEnterKey, findElementNumber};
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export {getRandomNumber, limitCommentaryLength, getRandomArrayElement, createObjectsArray, createUniqueRandomNumber, isEscapeKey, isEnterKey, findElementNumber, debounce};
