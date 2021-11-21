@@ -1,12 +1,12 @@
-import { ScaleSettings, EditorEffects } from './const.js';
+import {DEFAULT_SCALE_VALUE, EDITOR_EFFECTS, SCALE} from './const.js';
 
 const decreaseScale = (currentScale) => {
-  const value = parseInt(currentScale.value, 10) > (ScaleSettings.MIN_VALUE + ScaleSettings.STEP) ? parseInt(currentScale.value, 10) - ScaleSettings.STEP : ScaleSettings.MIN_VALUE;
+  const value = parseInt(currentScale.value, 10) > (SCALE.min + SCALE.step) ? parseInt(currentScale.value, 10) - SCALE.step : SCALE.min;
   currentScale.setAttribute('value', `${value}%`);
 };
 
 const increaseScale = (currentScale) => {
-  const value = parseInt(currentScale.value, 10) < (ScaleSettings.MAX_VALUE - ScaleSettings.STEP) ? parseInt(currentScale.value, 10) + ScaleSettings.STEP : ScaleSettings.MAX_VALUE;
+  const value = parseInt(currentScale.value, 10) < (SCALE.max - SCALE.step) ? parseInt(currentScale.value, 10) + SCALE.step : SCALE.max;
   currentScale.setAttribute('value', `${value}%`);
 };
 
@@ -46,17 +46,17 @@ const onFilterClick = (evt) => {
   const sliderElement = document.querySelector('.effect-level__slider');
   const effectLevel = document.querySelector('#effect-level__value');
   imagePreview.className = `effects__preview--${imageFilter}`;
-  effectLevel.value = EditorEffects[imageFilter].max;
+  effectLevel.value = EDITOR_EFFECTS[imageFilter].max;
   effectLevel.setAttribute('value', effectLevel.value);
   if (sliderElement.classList.contains('noUi-target')) {
     sliderElement.noUiSlider.destroy();
   }
   if (!(imageFilter === 'none')) {
-    createSlider(sliderElement, EditorEffects[imageFilter]);
+    createSlider(sliderElement, EDITOR_EFFECTS[imageFilter]);
     sliderElement.noUiSlider.on('update', (_, handle, unencoded) => {
       effectLevel.value = unencoded[handle];
       effectLevel.setAttribute('value', unencoded);
-      imagePreview.style.filter = `${EditorEffects[imageFilter].style}(${effectLevel.value}${EditorEffects[imageFilter].unit})`;
+      imagePreview.style.filter = `${EDITOR_EFFECTS[imageFilter].style}(${effectLevel.value}${EDITOR_EFFECTS[imageFilter].unit})`;
     });
   } else {
     imagePreview.style.filter = 'none';
@@ -67,8 +67,8 @@ const setDefaultEditorValues = () => {
   const imagePreview = document.querySelector('.img-upload__preview img');
   const scaleInput = document.querySelector('.scale__control--value');
   const effectLevel = document.querySelector('#effect-level__value');
-  imagePreview.style.transform = `scale(${ScaleSettings.DEFAULT_VALUE / 100})`;
-  scaleInput.setAttribute('value', `${ScaleSettings.DEFAULT_VALUE}%`);
+  imagePreview.style.transform = `scale(${DEFAULT_SCALE_VALUE / 100})`;
+  scaleInput.setAttribute('value', `${DEFAULT_SCALE_VALUE}%`);
   imagePreview.style.filter = 'none';
   document.querySelector('#effect-none').checked = true;
   if (document.querySelector('.effect-level__slider').classList.contains('noUi-target')) {

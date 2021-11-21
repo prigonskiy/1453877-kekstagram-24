@@ -1,8 +1,8 @@
-import { createBigPictureModal, openBigPictureModal, closeBigPictureModal } from './big-picture.js';
-import { openImageUploadModal, closeImageUploadModal } from './form.js';
-import { isEscapeKey } from './utils.js';
-import { HashtagsRestrictions, MAX_COMMENTARY_LENGTH } from './const.js';
-import { scaleImageUpload, onScaleClick, onFilterClick, setDefaultEditorValues } from './editor.js';
+import {createBigPictureModal, openBigPictureModal, closeBigPictureModal} from './big-picture.js';
+import {openImageUploadModal, closeImageUploadModal} from './form.js';
+import {findElementNumber, isEscapeKey} from './util.js';
+import {HASHTAGS_SYMBOL_RESTRICTIONS, HASHTAG_MIN_LENGTH, HASHTAG_MAX_LENGTH, HASHTAGS_MAX_AMOUNT, MAX_COMMENTARY_LENGTH} from './const.js';
+import {scaleImageUpload, onScaleClick, onFilterClick, setDefaultEditorValues} from './editor.js';
 
 
 // Функция, описывающая порядок действий при нажатии на ESC при открытом модальном окне полноэкранного просмотра пользовательского изображения
@@ -38,8 +38,7 @@ const listenThumbnails = (array) => {
     const bigPicture = document.querySelector('.big-picture');
     if ((bigPicture.classList.contains('hidden')) && (evt.target.closest('.picture'))) {
       evt.preventDefault();
-      bigPicture.setAttribute('id', evt.target.closest('.picture').id);
-      createBigPictureModal(array[evt.target.closest('.picture').id]);
+      createBigPictureModal(array[findElementNumber(evt.target.closest('.picture'), document.querySelectorAll('.picture'))]);
       openBigPictureModal();
       document.addEventListener('keydown', onBigPictureModalEscKeydown);
       bigPicture.querySelector('.big-picture__cancel').addEventListener('click', onBigPictureModalCloseClick);
@@ -51,6 +50,7 @@ const listenThumbnails = (array) => {
 // Обработка инпута хэштегов
 const onHashtagValueChange = () => {
   const input = document.querySelector('.text__hashtags');
+
   const hashtagsArray = input.value.split(' ');
   const checkedHashtagsArray = [...new Set(hashtagsArray)];
 
@@ -59,13 +59,13 @@ const onHashtagValueChange = () => {
       input.setCustomValidity('');
     } else if (checkedHashtagsArray.length < hashtagsArray.length) {
       input.setCustomValidity('Один и тот же хэш-тег не может быть использован дважды');
-    } else if (hashtagsArray.length > HashtagsRestrictions.MAX_AMOUNT) {
+    } else if (hashtagsArray.length > HASHTAGS_MAX_AMOUNT) {
       input.setCustomValidity('Нельзя указать больше пяти хэш-тегов');
-    } else if (!HashtagsRestrictions.CHARACTERS.test(hashtagsArray[currentHashtag])) {
+    } else if (!HASHTAGS_SYMBOL_RESTRICTIONS.test(hashtagsArray[currentHashtag])) {
       input.setCustomValidity('Хэш-тег должен начинаться с символа # (решётка) и строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.;');
-    } else if (hashtagsArray[currentHashtag].length < HashtagsRestrictions.MIN_LENGTH) {
+    } else if (hashtagsArray[currentHashtag].length < HASHTAG_MIN_LENGTH) {
       input.setCustomValidity('Минимальная длина хэш-тега 2 символа, включая решётку');
-    } else if (hashtagsArray[currentHashtag].length > HashtagsRestrictions.MAX_LENGTH) {
+    } else if (hashtagsArray[currentHashtag].length > HASHTAG_MAX_LENGTH) {
       input.setCustomValidity('Максимальная длина одного хэш-тега 20 символов, включая решётку');
     } else {
       input.setCustomValidity('');
@@ -147,4 +147,4 @@ const listenUploadForm = () => {
   document.querySelector('#upload-file').addEventListener('change', onImageUploadModalUpload);
 };
 
-export { listenThumbnails, listenUploadForm, setUserFormSubmit };
+export {listenThumbnails, listenUploadForm, setUserFormSubmit};

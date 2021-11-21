@@ -1,11 +1,10 @@
-import {createThumbnails} from './thumbs.js';
-import {listenThumbnails, listenUploadForm} from './gallery.js';
+// Загрузка изображений и сопутствующих данных с внешнего источника;
+// Их отображение на главной странице — при входе на сайт (порезать полученный массив до 25 методом slice)
+// Показать блок фильтрации фотографий
+// Фильтрация фотографий с помощью блока фильтров:
+// по умолчанию (как в оригинале), случайные (подрезаем массив до 10), обсуждаемые (фотографии отсортированы в порядке убывания комментариев)
+// Убрать дребезг!
 
-fetch('https://24.javascript.pages.academy/kekstagram/data')
-  .then((response) => response.json())
-  .then((photosArray) => {
-    createThumbnails(photosArray);
-    listenThumbnails(photosArray);
-  });
+import { startApp } from './app.js';
 
-listenUploadForm();
+startApp();
