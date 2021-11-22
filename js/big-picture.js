@@ -76,6 +76,15 @@ const createBigPictureModal = (object) => {
   listenCommentsLoader(object.comments);
 };
 
+// Костыль: пересоздание кнопки подгрузки комментариев для избавления от всех eventlistener'ов
+const replaceCommentLoaderButton = () => {
+  const social = document.querySelector('.social');
+  const loaderButton = social.querySelector('.comments-loader');
+  const clonedLoaderButton = loaderButton.cloneNode();
+  clonedLoaderButton.textContent = 'Загрузить ещё';
+  social.replaceChild(clonedLoaderButton, loaderButton);
+};
+
 // Функция для открытия полноэкранного режима просмотра
 const openBigPictureModal = () => {
   document.querySelector('.big-picture').classList.remove('hidden');
@@ -91,4 +100,4 @@ const closeBigPictureModal = () => {
   }
 };
 
-export { createBigPictureModal, openBigPictureModal, closeBigPictureModal };
+export { createBigPictureModal, openBigPictureModal, closeBigPictureModal, replaceCommentLoaderButton };

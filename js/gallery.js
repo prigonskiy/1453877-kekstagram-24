@@ -1,4 +1,4 @@
-import { createBigPictureModal, openBigPictureModal, closeBigPictureModal } from './big-picture.js';
+import { createBigPictureModal, openBigPictureModal, closeBigPictureModal, replaceCommentLoaderButton } from './big-picture.js';
 import { openImageUploadModal, closeImageUploadModal } from './form.js';
 import { isEscapeKey } from './utils.js';
 import { HashtagsRestrictions, MAX_COMMENTARY_LENGTH } from './const.js';
@@ -38,7 +38,7 @@ const listenThumbnails = (array) => {
     const bigPicture = document.querySelector('.big-picture');
     if ((bigPicture.classList.contains('hidden')) && (evt.target.closest('.picture'))) {
       evt.preventDefault();
-      bigPicture.setAttribute('id', evt.target.closest('.picture').id);
+      replaceCommentLoaderButton();
       createBigPictureModal(array[evt.target.closest('.picture').id]);
       openBigPictureModal();
       document.addEventListener('keydown', onBigPictureModalEscKeydown);
