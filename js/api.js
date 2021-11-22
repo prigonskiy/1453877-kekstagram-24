@@ -14,7 +14,7 @@ const getData = async () => {
 // Отправить форму
 const sendData = (onSuccess, onFail, body) =>{
   fetch(
-    'https://24.javascript.pages.academy/kekstagram/23',
+    'https://24.javascript.pages.academy/kekstagram',
     {
       method: 'POST',
       body,
