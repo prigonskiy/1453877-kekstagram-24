@@ -1,4 +1,4 @@
-import { RERENDER_DELAY } from './const.js';
+import { RERENDER_DELAY, ALERT_SHOW_TIME } from './const.js';
 
 // Функция для проверки нажатия на кнопку Escape
 const isEscapeKey = (evt) => evt.key === 'Escape';
@@ -57,4 +57,56 @@ const createUniqueRandomNumber = (rangeStart, rangeEnd, usedNumbers) => {
   }
 };
 
-export { isEscapeKey, isEnterKey, debounce, getRandomNumber, validateCommentaryLength, showModalBackground, hideModalBackground, checkUsedNumber, createUniqueRandomNumber };
+// Создание окна для оповещения пользователя об успешной отправке формы
+const createSuccessWindow = () => {
+  const successTemplate = document.querySelector('#success').content;
+  const createSuccessWindowFragment = document.createDocumentFragment();
+  createSuccessWindowFragment.appendChild(successTemplate.cloneNode(true));
+  document.querySelector('body').appendChild(createSuccessWindowFragment);
+  const successContainer = document.querySelector('.success');
+  const successButton = successContainer.querySelector('.success__button');
+  successButton.addEventListener('click', () => {
+    successContainer.remove();
+  });
+};
+
+// Создание окна для оповещения пользователя об ошибке при отправке формы
+const createErrorWindow = () => {
+  const errorTemplate = document.querySelector('#error').content;
+  const createErrorWindowFragment = document.createDocumentFragment();
+  createErrorWindowFragment.appendChild(errorTemplate.cloneNode(true));
+  document.querySelector('body').appendChild(createErrorWindowFragment);
+  const errorContainer = document.querySelector('.error');
+  errorContainer.style.zIndex = '100';
+  const errorButton = errorContainer.querySelector('.error__button');
+  errorButton.addEventListener('click', () => {
+    errorContainer.remove();
+  });
+};
+
+const alertUser = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.position = 'fixed';
+  alertContainer.style.left = '0';
+  alertContainer.style.right = '0';
+  alertContainer.style.bottom = '0';
+  alertContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+  alertContainer.style.padding = '60px 20px';
+  alertContainer.style.fontFamily = '"Open Sans", "Arial", sans-serif';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.lineHeight = '40px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.border = '2px solid red';
+  alertContainer.style.zIndex = '100';
+  alertContainer.style.textTransform = 'normal';
+  alertContainer.textContent = message;
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+};
+
+// Создание сообщения об ошибке при отправке ф
+
+export { isEscapeKey, isEnterKey, debounce, getRandomNumber, validateCommentaryLength, showModalBackground, hideModalBackground, checkUsedNumber, createUniqueRandomNumber, createSuccessWindow, createErrorWindow, alertUser };

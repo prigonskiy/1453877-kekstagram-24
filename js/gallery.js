@@ -1,8 +1,9 @@
 import { createBigPictureModal, openBigPictureModal, closeBigPictureModal, replaceCommentLoaderButton } from './big-picture.js';
 import { openImageUploadModal, closeImageUploadModal } from './form.js';
-import { isEscapeKey } from './utils.js';
-import { HashtagsRestrictions, MAX_COMMENTARY_LENGTH } from './const.js';
+import { isEscapeKey, alertUser } from './utils.js';
+import { HashtagsRestrictions, MAX_COMMENTARY_LENGTH, FileTypes } from './const.js';
 import { scaleImageUpload, onScaleClick, onFilterClick, setDefaultEditorValues } from './editor.js';
+import { sendData } from './api.js';
 
 
 // Функция, описывающая порядок действий при нажатии на ESC при открытом модальном окне полноэкранного просмотра пользовательского изображения
@@ -115,31 +116,52 @@ const onImageUploadModalCloseClick = (evt) => {
   document.removeEventListener('keydown', onImageUploadModalEscKeydown);
 };
 
-// Прослушивание кнопки "опубликовать"
+// Закрытие окна загрузки
+const closeAndResetForm = () => {
+  closeImageUploadModal();
+  setDefaultEditorValues();
+  document.removeEventListener('click', onImageUploadModalCloseClick);
+  document.querySelector('.text__hashtags').removeEventListener('blur', onHashtagValueChange);
+  document.querySelector('.text__description').removeEventListener('blur', onDescriptionChange);
+  document.querySelector('.img-upload__scale').removeEventListener('click', onScaleClick);
+  document.querySelector('.effects__list').removeEventListener('change', onFilterClick);
+  document.removeEventListener('keydown', onImageUploadModalEscKeydown);
+};
+
 const setUserFormSubmit = (onSuccess) => {
-  document.querySelector('#upload-select-image').addEventListener('submit', (evt) => {
+  const userForm = document.querySelector('#upload-select-image');
+  userForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    const formData = new FormData(evt.target);
-    fetch('https://24.javascript.pages.academy/kekstagram',
-      {
-        method: 'POST',
-        body: formData,
-      },
-    ).then(() => onSuccess());
+
+    sendData(
+      () => onSuccess(),
+      () => closeAndResetForm(),
+      new FormData(evt.target),
+    );
   });
 };
 
 // Функция, описывающая поряок действий при нажатии на контрол загрузки изображений
 const onImageUploadModalUpload = () => {
-  openImageUploadModal();
-  scaleImageUpload();
-  document.querySelector('#upload-cancel').addEventListener('click', onImageUploadModalCloseClick);
-  document.querySelector('.text__hashtags').addEventListener('blur', onHashtagValueChange);
-  document.querySelector('.text__description').addEventListener('blur', onDescriptionChange);
-  document.querySelector('.img-upload__scale').addEventListener('click', onScaleClick);
-  document.querySelector('.effects__list').addEventListener('change', onFilterClick);
-  document.addEventListener('keydown', onImageUploadModalEscKeydown);
-  setUserFormSubmit(setDefaultEditorValues());
+  const imageInput = document.querySelector('#upload-file');
+  const imagePreview = document.querySelector('.img-upload__preview img');
+  const newImage = imageInput.files[0];
+  const newImageName = newImage.name.toLowerCase();
+  const validFileType = FileTypes.some((extension) => newImageName.endsWith(extension));
+  if (validFileType) {
+    imagePreview.src = URL.createObjectURL(newImage);
+    openImageUploadModal();
+    scaleImageUpload();
+    document.querySelector('#upload-cancel').addEventListener('click', onImageUploadModalCloseClick);
+    document.querySelector('.text__hashtags').addEventListener('blur', onHashtagValueChange);
+    document.querySelector('.text__description').addEventListener('blur', onDescriptionChange);
+    document.querySelector('.img-upload__scale').addEventListener('click', onScaleClick);
+    document.querySelector('.effects__list').addEventListener('change', onFilterClick);
+    document.addEventListener('keydown', onImageUploadModalEscKeydown);
+  } else {
+    alertUser('Выберите изображение в формате gif, jpg/jpeg или png');
+    closeImageUploadModal();
+  }
 };
 
 // Функция, добавляющая обработчик события контролу загрузки изображений
@@ -147,4 +169,4 @@ const listenUploadForm = () => {
   document.querySelector('#upload-file').addEventListener('change', onImageUploadModalUpload);
 };
 
-export { listenThumbnails, listenUploadForm, setUserFormSubmit };
+export { listenThumbnails, listenUploadForm, setUserFormSubmit, closeAndResetForm };

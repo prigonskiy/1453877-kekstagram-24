@@ -1,6 +1,7 @@
 export const MAX_COMMENTARY_LENGTH = 140;
 export const RERENDER_DELAY = 500;
 export const DEFAULT_COMMENTS_AMOUNT = 5;
+export const ALERT_SHOW_TIME = 100000;
 
 export const PicturesFilterAmount = {
   DEFAULT: 25,

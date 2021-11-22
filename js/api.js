@@ -1,14 +1,36 @@
+import { createSuccessWindow, createErrorWindow, alertUser } from './utils.js';
+
 const getData = async () => {
   try {
     const response = await fetch('https://24.javascript.pages.academy/kekstagram/data');
     if (response.ok) {
-      // сюда включалку и обработчик фильтров
       return await response.json();
-
     }
   } catch (error) {
-    // Показать диалоговое окно об ошибке
+    alertUser('Не удаётся загрузить информацию. Перезагрузите страницу');
   }
 };
 
-export { getData };
+// Отправить форму
+const sendData = (onSuccess, onFail, body) =>{
+  fetch(
+    'https://24.javascript.pages.academy/kekstagram/23',
+    {
+      method: 'POST',
+      body,
+    },
+  )
+    .then((response) => {
+      if (response.ok) {
+        onSuccess();
+        createSuccessWindow();
+      } else {
+        createErrorWindow();
+      }
+    })
+    .catch(() => {
+      onFail('Не удалось отправить форму. Попробуйте ещё раз');
+    });
+};
+
+export { getData, sendData };
